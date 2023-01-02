@@ -1,4 +1,8 @@
-import './globals.css'
+import './(global)/globals.css'
+import { Poppins } from '@next/font/google'
+import Provider from './(global)/Provider'
+
+const poppins = Poppins( {subsets : ["latin"], weight : ["300" ,"400", "500", "600", "700"], fallback : ["sans-serif", "system-ui"] } )
 
 export default function RootLayout({
   children,
@@ -7,12 +11,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/*
-        <head /> will contain the components returned by the nearest parent
-        head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
-      */}
       <head />
-      <body>{children}</body>
+      <body>
+        <main className={poppins.className}>
+          <Provider>
+            {children}
+          </Provider>
+        </main>
+      </body>
     </html>
   )
 }
