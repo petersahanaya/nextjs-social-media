@@ -9,7 +9,6 @@ import useMutation from "swr/mutation"
 import { useSWRConfig } from "swr"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
-import { useCallback } from "react"
 
 const isLike = (likes: Array<LikesType>, username: string): boolean => {
     const find = likes?.find((like) => like.username === username)
@@ -61,7 +60,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
         const data = await res.json()
     }
 
-    const handleDislike = useCallback(async (postId : string) => {
+    const handleDislike = async (postId : string) => {
         const mappedData = initialData.map((data) => {
             if (data.postId === postId) {
                 return {
@@ -89,7 +88,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
         }
 
         const data = await res.json()
-    }, [postId, session?.user?.name])
+    })
 
     const handleDblClick = (postId : string) => {
         if(isLike(likes, session?.user?.name!)) {
