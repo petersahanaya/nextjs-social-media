@@ -4,11 +4,11 @@ import { useSession } from "next-auth/react"
 import Image from "next/image"
 import {FaTelegramPlane} from 'react-icons/fa'
 import {BiWorld, BiPhotoAlbum} from 'react-icons/bi'
-import { ChangeEvent, useCallback, useState } from "react"
+import { ChangeEvent, useState } from "react"
 import Link from "next/link"
 import { RiHomeSmile2Line } from "react-icons/ri"
 import Images from "../../../components/Images"
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/router"
 
 const Post = () => {
     const { data : session } = useSession()
@@ -33,7 +33,7 @@ const Post = () => {
         }
     }
 
-    const handlePost = useCallback(async () => {
+    const handlePost = (async () => {
         if(desc && img) {
             const formData = new FormData()
             setLoading(true)
@@ -69,7 +69,7 @@ const Post = () => {
                 }
             }
         }
-    }, [img, desc, session?.user?.name, session?.user?.image, session?.user?.id, success, loading, preview])
+    })
     
   return (
     <>

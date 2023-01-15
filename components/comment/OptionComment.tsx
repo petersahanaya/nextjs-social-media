@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/router"
 import { useState } from "react"
 
 const OptionComment = ({commentId} : {commentId : string}) => {
@@ -19,7 +19,7 @@ const OptionComment = ({commentId} : {commentId : string}) => {
         if(res.ok) {
             setIsLoading(false)
             setIsDeleted("Comment Deleted..")
-            router.refresh()
+            router.replace(router.asPath)
             setTimeout(() => {
                 setIsDeleted("")
             }, 2000)
