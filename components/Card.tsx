@@ -7,6 +7,7 @@ import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai'
 import { GoComment } from 'react-icons/go'
 import useMutation from "swr/mutation"
 import { useSWRConfig } from "swr"
+import { useRouter } from "next/navigation"
 import Link from "next/link"
 
 const isLike = (likes: Array<LikesType>, username: string): boolean => {
@@ -26,6 +27,7 @@ interface CardProps extends PostType {
 
 const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, likes, initialData, userId }) => {
     const { data: session } = useSession()
+    const router = useRouter()
     const { mutate } = useSWRConfig()
     const { trigger } = useMutation("/api/post", fetcher)
 
@@ -52,6 +54,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
 
         if (res.ok) {
             trigger()
+            router.refresh()
         }
 
         const data = await res.json()
@@ -81,6 +84,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
 
         if (res.ok) {
             trigger()
+            router.refresh()
         }
 
         const data = await res.json()

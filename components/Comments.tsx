@@ -5,12 +5,14 @@ import { CommentType } from "../type"
 import Images from "./Images"
 import { TbHourglassEmpty } from 'react-icons/tb'
 import React, { ChangeEvent, useState } from "react"
+import { useRouter } from "next/navigation"
 import BoxComment from "./BoxComment"
 
 const Comments: React.FC<{ comments: CommentType[], session: Session | null, postId: string }> = ({ comments, session, postId }) => {
   const [desc, setDesc] = useState("")
   const [isAdding, setIsAdding] = useState(false)
   const [success, setSuccess] = useState("")
+  const router = useRouter()
 
   const handleComment = (e: ChangeEvent<HTMLInputElement>) => {
     setDesc(e.target.value)
@@ -34,6 +36,7 @@ const Comments: React.FC<{ comments: CommentType[], session: Session | null, pos
       setTimeout(() => {
         setSuccess("")
       }, 2000)
+      router.refresh()
     }
 
     const data = await res.json()

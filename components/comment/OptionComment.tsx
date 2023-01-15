@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 
 const OptionComment = ({commentId} : {commentId : string}) => {
@@ -11,7 +11,7 @@ const OptionComment = ({commentId} : {commentId : string}) => {
     
     const handleDelete = async (id : string) => {
         setIsLoading(true)
-        const res = await fetch(`${process.env.PORT}/api/comment?commentId=${id}`, {
+        const res = await fetch(`${process.env.PORT}api/comment?commentId=${id}`, {
             method : "DELETE"
         })    
         const data = await res.json()
@@ -19,7 +19,7 @@ const OptionComment = ({commentId} : {commentId : string}) => {
         if(res.ok) {
             setIsLoading(false)
             setIsDeleted("Comment Deleted..")
-            router.replace(router.asPath)
+            router.refresh()
             setTimeout(() => {
                 setIsDeleted("")
             }, 2000)
