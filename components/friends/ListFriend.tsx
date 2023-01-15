@@ -11,7 +11,7 @@ const getFriends : Fetcher<{followed : FollowType[]}> = async (url : string) => 
   }
 
 const ListFriend = ({session, params} : {session? : Session, params? : {id : string}}) => {
-    const url = `http://localhost:3000/api/friend?userId=${session?.user?.id ? session?.user?.id : params.id}`
+    const url = `http://localhost:3000/api/friend?userId=${session?.user?.id ? session?.user?.id : params?.id}`
     const { data : follows, isLoading, mutate } = useSWR(url, getFriends)
     const { trigger } = useSWRMutation(url, getFriends)
 
@@ -33,6 +33,7 @@ const ListFriend = ({session, params} : {session? : Session, params? : {id : str
         }
         
         const data : Awaited<{msg : "follow" | "unfollow"}> = await res.json()
+      }
 
     if(isLoading) {
         return <>
@@ -44,7 +45,7 @@ const ListFriend = ({session, params} : {session? : Session, params? : {id : str
     <main className="w-screen pl-20 mt-3">
         {follows?.followed.length ? <>
         {follows?.followed?.map((follow : FollowType, i) => (
-                <section key={i} className="w-[85vw] p-3 bg-white shadow-sm rounded-xl">
+          <section key={i} className="w-[85vw] p-3 bg-white shadow-sm rounded-xl">
                     <header className=" flex items-center gap-2 justify-around">
                         <article className="flex items-center gap-2">
                         <Images image={follow.whoFollowProfile} height={30} width={30}/>
@@ -58,10 +59,8 @@ const ListFriend = ({session, params} : {session? : Session, params? : {id : str
                 </section>
         ))}
         </> : null}
-        {!follows?.followed.length && <>
-            <p className="text-center text-sm text-stone-700">This user not have friend/p>
-        </> }
-    </main>
+        {!follows?.followed.length && <p className="text-center text-sm text-stone-700">This user not have friend</p>}
+  </main>
   )
 }
 
