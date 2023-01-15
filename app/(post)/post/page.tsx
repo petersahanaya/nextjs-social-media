@@ -39,7 +39,7 @@ const Post = () => {
             setLoading(true)
             formData.append('file', img![0], img![0].name)
 
-            const res = await fetch('http://localhost:3000/api/post', {
+            const res = await fetch(`${process.env.PORT}/api/post`, {
                 method : "POST",
                 headers : {},
                 body : formData
@@ -48,7 +48,7 @@ const Post = () => {
             const data : Awaited<{msg : string}> = await res.json()
 
             if(res.ok) {
-                const result = await fetch('http://localhost:3000/api/desc', {
+                const result = await fetch(`${process.env.PORT}/api/desc`, {
                     method : "POST",
                     headers : {
                         "Content-Type" : "application/json"

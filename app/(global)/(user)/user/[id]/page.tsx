@@ -17,8 +17,8 @@ const fetcher: Fetcher<{ msg: "cannot found" | "follow" | "unfollow", data: Logi
 
 const User = ({ params }: { params: { id: string } }) => {
   const { data: session } : any = useSession()
-  const { data : follows, isLoading, mutate } : any = useSWR(`/api/user?whoFollowId=${params.id}&&userId=${session?.user?.id}`, fetcher)
-  const { trigger } = useMutation(`https://p3social.vercel.app/api/user?whoFollowId=${params.id}&&userId=${session?.user?.id}`, fetcher)
+  const { data : follows, isLoading, mutate } : any = useSWR(`${process.env.PORT}/api/user?whoFollowId=${params.id}&&userId=${session?.user?.id}`, fetcher)
+  const { trigger } = useMutation(`${process.env.PORT}/api/user?whoFollowId=${params.id}&&userId=${session?.user?.id}`, fetcher)
   const [isFriend, setIsFriend] = useState(false)
 
   const handleFollow = async (userFollowId : string, userId : string) => {    
