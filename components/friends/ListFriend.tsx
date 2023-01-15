@@ -1,5 +1,4 @@
 import { Session } from "next-auth"
-import { useCallback } from "react";
 import useSWR, { Fetcher } from 'swr'
 import useSWRMutation from "swr/mutation"
 import { FollowType } from "../../type";
@@ -16,7 +15,7 @@ const ListFriend = ({session, params} : {session? : Session, params? : {id : str
     const { data : follows, isLoading, mutate } = useSWR(url, getFriends)
     const { trigger } = useSWRMutation(url, getFriends)
 
-    const handleFollow = useCallback(async (userFollowId : string, userId : string) => {   
+    const handleFollow = async (userFollowId : string, userId : string) => {   
         const filtering = follows?.followed.filter((follow) => follow.userId !== userId) 
 
         mutate({followed : filtering!}, {revalidate : false})
@@ -34,7 +33,6 @@ const ListFriend = ({session, params} : {session? : Session, params? : {id : str
         }
         
         const data : Awaited<{msg : "follow" | "unfollow"}> = await res.json()
-      }, [])
 
     if(isLoading) {
         return <>
@@ -61,7 +59,7 @@ const ListFriend = ({session, params} : {session? : Session, params? : {id : str
         ))}
         </> : null}
         {!follows?.followed.length && <>
-            <p className="text-center text-sm text-stone-700">This user not have friend's</p>
+            <p className="text-center text-sm text-stone-700">This user not have friend/p>
         </> }
     </main>
   )

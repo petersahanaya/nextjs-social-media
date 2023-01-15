@@ -32,7 +32,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
     const { mutate } = useSWRConfig()
     const { trigger } = useMutation("/api/post", fetcher)
 
-    const handleLike = useCallback(async (postId: string) => {
+    const handleLike = async (postId: string) => {
         const mappedData = initialData.map((data) => {
             if (data.postId === postId) {
                 return {
@@ -59,7 +59,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
         }
 
         const data = await res.json()
-    }, [postId, session?.user?.name])
+    }
 
     const handleDislike = useCallback(async (postId : string) => {
         const mappedData = initialData.map((data) => {
@@ -130,7 +130,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
                 </section>
             </article>
             <footer className="w-full">
-                <p className="ml-4 text-stone-700 text-sm">Liked by {likes.length} and other's </p>
+                <p className="ml-4 text-stone-700 text-sm">Liked by {likes.length} and other </p>
                 <div className="p-3 flex items-center gap-2">
                     <Link href={`${session?.user?.id === userId ? "/profile" : `/user/${userId}`}`}>
                     <p className="text-stone-800 font-[500] text-[.9rem]">{username}</p>

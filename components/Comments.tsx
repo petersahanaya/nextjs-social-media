@@ -75,7 +75,7 @@ const Comments: React.FC<{ comments: CommentType[], session: Session | null, pos
         </>
         : <div className="mt-3 flex flex-col justify-center items-center gap-2">
           <TbHourglassEmpty size={30} color="rgb(45, 45, 45)" />
-          <p className="text-center text-stone-700 text-sm mt-12">There's no comment yet..</p></div>}
+          <p className="text-center text-stone-700 text-sm mt-12">There is no comment yet..</p></div>}
       {success && <p className="bg-stone-800 text-stone-100 w-[80vw] rounded-xl fixed top-[10px] right-[10%] text-center  text-sm p-2">{success}</p>}
       {isAdding && <p className="bg-stone-800 text-stone-100 w-[80vw] rounded-xl fixed top-[10px] right-[10%] text-center  text-sm p-2">Adding comment..</p>}
     </nav>
