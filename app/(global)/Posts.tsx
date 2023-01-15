@@ -3,7 +3,7 @@ import PostLayout from "../../components/PostLayout"
 import { PostType } from "../../type"
 
 const getPost = async () => {
-  const res = await fetch("http://localhost:3000/api/post")
+  const res = await fetch(`${process.env.PORT}/api/post`)
     return res.json()
 }
 
