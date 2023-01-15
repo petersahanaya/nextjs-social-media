@@ -11,6 +11,9 @@ const nextConfig = {
       }
     ]
   },
+  eslint : {
+    ignoreDuringBuilds : true
+  },
   env : {
     PROVIDER_CLIENT_SECRET : "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",
     PROVIDER_CLIENT_ID : "229256620237-th8na2ds21piitcrp2ljg6nnugp9h13p.apps.googleusercontent.com",

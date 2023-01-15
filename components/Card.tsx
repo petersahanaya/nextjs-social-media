@@ -88,7 +88,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
         }
 
         const data = await res.json()
-    })
+    }
 
     const handleDblClick = (postId : string) => {
         if(isLike(likes, session?.user?.name!)) {
