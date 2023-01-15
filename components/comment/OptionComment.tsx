@@ -11,7 +11,7 @@ const OptionComment = ({commentId} : {commentId : string}) => {
     
     const handleDelete = async (id : string) => {
         setIsLoading(true)
-        const res = await fetch(`/api/comment?commentId=${id}`, {
+        const res = await fetch(`https://p3social.vercel.app/api/comment?commentId=${id}`, {
             method : "DELETE"
         })    
         const data = await res.json()

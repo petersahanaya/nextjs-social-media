@@ -17,7 +17,7 @@ const getFriends: Fetcher<{ followed: FollowType[] }> = async (url: string) => {
 
 const PageFriend = () => {
   const { data: session } : any = useSession();
-  const url = `http://localhost:3000/api/friend?userId=${session?.user?.id}`
+  const url = `https://p3social.vercel.app/api/friend?userId=${session?.user?.id}`
   const { data: friends, isLoading, mutate } : any = useSWR(
     url
     ,
@@ -33,7 +33,7 @@ const PageFriend = () => {
 
         mutate({followed : filtering!}, {revalidate : false})
 
-        const res = await fetch(`/api/follow`, {
+        const res = await fetch(`https://p3social.vercel.app/api/follow`, {
           method : "POST",
           headers : {
             "Content-Type" : "application/json"

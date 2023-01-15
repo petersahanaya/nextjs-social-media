@@ -44,7 +44,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
         })
         mutate('/api/post', mappedData, { revalidate: false })
 
-        const res = await fetch(`/api/desc?postId=${postId}`, {
+        const res = await fetch(`https://p3social.vercel.app/api/desc?postId=${postId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -74,7 +74,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
 
         mutate('/api/post', mappedData, { revalidate: false })
 
-        const res = await fetch(`/api/desc?postId=${postId}`, {
+        const res = await fetch(`https://p3social.vercel.app/api/desc?postId=${postId}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"

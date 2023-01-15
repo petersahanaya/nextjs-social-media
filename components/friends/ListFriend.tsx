@@ -11,7 +11,7 @@ const getFriends : Fetcher<{followed : FollowType[]}> = async (url : string) => 
   }
 
 const ListFriend = ({session, params} : {session? : Session, params? : {id : string}}) => {
-    const url = `http://localhost:3000/api/friend?userId=${session?.user?.id ? session?.user?.id : params?.id}`
+    const url = `https://p3social.vercel.app/api/friend?userId=${session?.user?.id ? session?.user?.id : params?.id}`
     const { data : follows, isLoading, mutate } = useSWR(url, getFriends)
     const { trigger } = useSWRMutation(url, getFriends)
 
