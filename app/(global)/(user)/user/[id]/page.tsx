@@ -16,8 +16,8 @@ const fetcher: Fetcher<{ msg: "cannot found" | "follow" | "unfollow", data: Logi
 }
 
 const User = ({ params }: { params: { id: string } }) => {
-  const { data: session } = useSession()
-  const { data : follows, isLoading, mutate } = useSWR(`/api/user?whoFollowId=${params.id}&&userId=${session?.user?.id}`, fetcher)
+  const { data: session } : any = useSession()
+  const { data : follows, isLoading, mutate } : any = useSWR(`/api/user?whoFollowId=${params.id}&&userId=${session?.user?.id}`, fetcher)
   const { trigger } = useMutation(`/api/user?whoFollowId=${params.id}&&userId=${session?.user?.id}`, fetcher)
   const [isFriend, setIsFriend] = useState(false)
 

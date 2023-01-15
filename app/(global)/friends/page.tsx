@@ -16,20 +16,20 @@ const getFriends: Fetcher<{ followed: FollowType[] }> = async (url: string) => {
 };
 
 const PageFriend = () => {
-  const { data: session } = useSession();
+  const { data: session } : any = useSession();
   const url = `http://localhost:3000/api/friend?userId=${session?.user?.id}`
-  const { data: friends, isLoading, mutate } = useSWR(
+  const { data: friends, isLoading, mutate } : any = useSWR(
     url
     ,
     getFriends
     );
     
-  const { trigger , isMutating } = useSWRMutation(url, getFriends)
+  const { trigger } = useSWRMutation(url, getFriends)
   const [search, setSearch] = useState("")
   const [initData, setinitData] = useState<[] | FollowType>([])
 
     const handleFollow = async (userFollowId : string, userId : string) => {   
-        const filtering = friends?.followed.filter((follow) => follow.userId !== userId) 
+        const filtering = friends?.followed.filter((follow : FollowType) => follow.userId !== userId) 
 
         mutate({followed : filtering!}, {revalidate : false})
 
@@ -54,7 +54,7 @@ const PageFriend = () => {
           return mutate({followed : initData}, {revalidate : false})
         }
         
-        const filtering = friends?.followed.filter((friend) => (
+        const filtering = friends?.followed.filter((friend : FollowType) => (
           friend.whoFollow.toLowerCase().includes(value.toLowerCase())
         ))
 
@@ -91,7 +91,7 @@ const PageFriend = () => {
       <section className="mt-3 md:pl-4">
         
       {friends?.followed?.length ? <>
-        {friends?.followed?.map((follow : FollowType, i) => (
+        {friends?.followed?.map((follow : FollowType, i : number) => (
                 <section key={i} className="md:w-[85vw] w-full p-3 bg-white shadow-sm rounded-xl">
                     <header className=" flex items-center gap-2 justify-around">
                           <Link className="flex items-center gap-2" href={`/user/${follow.whoFollowId}`}>

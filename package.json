@@ -1,7 +1,12 @@
 {
-  "name": "day-1",
+  "name": "P3Social - NEXTJS 13",
   "version": "0.1.0",
   "private": true,
+  "author": {
+    "name": "Peter Sahanaya",
+    "email": "petersahanaya09@gmail.com",
+    "url": "https://github.com/petersahanaya"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
