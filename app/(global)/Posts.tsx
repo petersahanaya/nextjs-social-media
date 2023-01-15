@@ -10,8 +10,8 @@ const getPost = async () => {
 const Post = async () => {
   const posts : Awaited<{post : PostType[]}> = await getPost()
   return (
-    <main className="w-screen h-screen overflow-y-scroll pb-48">
-      <PostLayout post={posts.post}>
+    <main className="w-screen bg-slate-100 pb-48">
+      <PostLayout post={posts.post} >
         <Posts/>
       </PostLayout>
     </main>

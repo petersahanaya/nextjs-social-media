@@ -9,6 +9,7 @@ import useMutation from "swr/mutation"
 import { useSWRConfig } from "swr"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
+import { useCallback } from "react"
 
 const isLike = (likes: Array<LikesType>, username: string): boolean => {
     const find = likes?.find((like) => like.username === username)
@@ -25,13 +26,13 @@ interface CardProps extends PostType {
     initialData: PostType[]
 }
 
-const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, likes, initialData }) => {
+const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, likes, initialData, userId }) => {
     const { data: session } = useSession()
     const router = useRouter()
     const { mutate } = useSWRConfig()
     const { trigger } = useMutation("/api/post", fetcher)
 
-    const handleLike = async (postId: string) => {
+    const handleLike = useCallback(async (postId: string) => {
         const mappedData = initialData.map((data) => {
             if (data.postId === postId) {
                 return {
@@ -58,9 +59,9 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
         }
 
         const data = await res.json()
-    }
+    }, [postId, session?.user?.name])
 
-    const handleDislike = async (postId : string) => {
+    const handleDislike = useCallback(async (postId : string) => {
         const mappedData = initialData.map((data) => {
             if (data.postId === postId) {
                 return {
@@ -88,7 +89,7 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
         }
 
         const data = await res.json()
-    }
+    }, [postId, session?.user?.name])
 
     const handleDblClick = (postId : string) => {
         if(isLike(likes, session?.user?.name!)) {
@@ -99,11 +100,15 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
     }
 
     return (
-        <nav className="bg-white w-[80vw] h-[24.5rem] rounded-xl shadow-sm">
-            <header className={`w-full flex items-center gap-2 p-3 ${session?.user?.name === username && "justify-around"}`}>
+        <nav className="bg-white w-[80vw] md:w-[60vw] h-[24.5rem] lg:w-[40vw] xl:w-[40vw] rounded-xl shadow-sm">
+            <header className={`w-full flex items-center gap-2 p-3 ${session?.user?.name === username ? "justify-around" : ""}`}>
                 <div className="flex justify-around items-center gap-2">
+                    <Link href={`${session?.user?.id === userId ? "/profile" : `/user/${userId}`}`}>
                     <Images image={profile} radius="rounded-full shadow-md cursor-pointer" />
+                    </Link>
+                    <Link href={`${session?.user?.id === userId ? "/profile" : `/user/${userId}`}`}>
                     <p className="text-stone-700 text-sm">{username}</p>
+                    </Link>
                 </div>
                 {session?.user?.name === username &&
                     <span className="cursor-pointer">
@@ -112,8 +117,8 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
                 }
             </header>
             <article className="w-full">
-                <section>
-                    <Image onDoubleClick={() => handleDblClick(postId)} className="w-full object-cover h-[13rem]" src={`/${image}`} alt="Post" fill={false} width={340} height={250} />
+                <section className="relative w-full h-[13rem]">
+                    <Image className="w-auto object-cover" onDoubleClick={() => handleDblClick(postId)} src={`/${image}`}  alt="Post" fill={true}/>
                 </section>
                 <section className="w-full p-3 flex items-center  gap-2">
                     {!isLike(likes, session?.user?.name!) ?
@@ -127,7 +132,9 @@ const Card: React.FC<CardProps> = ({ username, profile, image, desc, postId, lik
             <footer className="w-full">
                 <p className="ml-4 text-stone-700 text-sm">Liked by {likes.length} and other's </p>
                 <div className="p-3 flex items-center gap-2">
+                    <Link href={`${session?.user?.id === userId ? "/profile" : `/user/${userId}`}`}>
                     <p className="text-stone-800 font-[500] text-[.9rem]">{username}</p>
+                    </Link>
                     <p className="text-stone-700 text-[.8rem]">{desc}</p>
                 </div>
             </footer>

@@ -1,30 +1,43 @@
-import { Session } from "next-auth"
+'use client';
+
+import useSWR, { Fetcher } from 'swr'
 import Image from "next/image"
-import { connectToDatabase } from "../../lib/mongodb"
 import { PostType } from "../../type"
+import { profileSession } from '../../app/(global)/(profile)/profile/page';
 
-const getPost = async (username : string) => {
-    const { db } = await connectToDatabase()
-
-    const Post = db.collection<PostType[]>("Post")
-
-    return await Post.find({ username }, {projection : { _id : 0 }}).toArray()
+const fetcher : Fetcher<{ data? : PostType[], msg? : string }> = async (url : string) => {
+    const res = await fetch(url)
+    return res.json() 
 }
 
-const UserPost = async ({session} : { session : Session }) => {
-    const posts = await getPost(session.user?.name!)
+const UserPost = ({session, userId} : { session? : profileSession, userId? : string }) => {
+    const {data : posts, isLoading} = useSWR(`http://localhost:3000/api/posts?userId=${session?.user?.id! ? session?.user?.id :  userId}`, fetcher)
+    const LoadArr = [1, 2, 3, 4]
 
-  if(!posts.length) return (
-    <></>
+  if(isLoading) return (
+    <>
+      <article className="w-screen flex justify-center items-center gap-3 flex-wrap mt-3">
+          {LoadArr.map((_, i) => (
+            <nav key={i} className="w-[220px] h-[200px] rounded-xl bg-stone-600 animate-pulse"></nav>
+          ))}
+      </article>
+    </>
+  )
+
+  if(!posts?.data?.length) return (
+    <>
+    <p className="text-center mt-4 text-sm text-stone-600 ">{posts?.msg}</p>
+    </>
   )
 
   return (
-    <nav className="flex items-center mt-2 p-2">
-     {posts.map((post, i) => (
+    <nav className="flex items-center justify-around flex-wrap mt-2 p-2">
+     {posts?.data?.map((post, i) => (
         <section key={i} className="w-[200px] h-[13rem] shadow-sm transition-[200ms] cursor-pointer hover:scale-105">
             <Image src={`/${post.image}`} width={200} height={140} alt="post" className="w-full h-full object-cover rounded-xl"/>
         </section>
      ))}   
+     
     </nav>
   )
 }

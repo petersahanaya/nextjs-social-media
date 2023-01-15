@@ -1,5 +1,7 @@
 import Footer from '../../components/Footer'
+import Provider from './Provider'
 
+export const runtime = "experimental-edge"
 
 export default function RootLayout({
   children,
@@ -8,7 +10,9 @@ export default function RootLayout({
 }) {
   return (
         <main>
-            {children}
+            <Provider>
+              {children}
+            </Provider>
             <Footer/>
         </main>
   )

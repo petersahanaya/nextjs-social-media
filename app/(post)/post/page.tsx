@@ -4,12 +4,11 @@ import { useSession } from "next-auth/react"
 import Image from "next/image"
 import {FaTelegramPlane} from 'react-icons/fa'
 import {BiWorld, BiPhotoAlbum} from 'react-icons/bi'
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useCallback, useState } from "react"
 import Link from "next/link"
 import { RiHomeSmile2Line } from "react-icons/ri"
 import Images from "../../../components/Images"
 import { useRouter } from "next/navigation"
-import Postloading from "./loading"
 
 const Post = () => {
     const { data : session } = useSession()
@@ -17,6 +16,7 @@ const Post = () => {
     const [preview, setPreview] = useState("")
     const [desc, setDesc] = useState("")
     const [success, setSuccess] = useState("")
+    const [loading, setLoading] = useState(false)
     const router = useRouter()
 
     const handleDesc = (e : ChangeEvent<HTMLInputElement>) => {
@@ -33,10 +33,10 @@ const Post = () => {
         }
     }
 
-    const handlePost = async () => {
+    const handlePost = useCallback(async () => {
         if(desc && img) {
             const formData = new FormData()
-
+            setLoading(true)
             formData.append('file', img![0], img![0].name)
 
             const res = await fetch('http://localhost:3000/api/post', {
@@ -53,12 +53,13 @@ const Post = () => {
                     headers : {
                         "Content-Type" : "application/json"
                     },
-                    body : JSON.stringify({desc, image : data.msg, profile : session?.user?.image!, username : session?.user?.name!})
+                    body : JSON.stringify({desc, image : data.msg, profile : session?.user?.image!, username : session?.user?.name!, userId : session?.user?.id})
                 })
 
                 const resp = await result.json()
 
                 if(result.ok) {
+                    setLoading(false)
                     setSuccess("Post Uploaded")
 
                     setTimeout(() => {
@@ -68,12 +69,12 @@ const Post = () => {
                 }
             }
         }
-    }
+    }, [img, desc, session?.user?.name, session?.user?.image, session?.user?.id, success, loading, preview])
     
   return (
     <>
     <main className="w-screen h-screen overflow-hidden bg-slate-100">
-        <header className="w-screen h-max p-3 bg-white flex items-center gap-2 px-10">
+        <header className="w-screen h-max p-3 bg-white flex items-center gap-2 px-10 md:pl-20">
             <Images image={session?.user?.image!} width={65} height={65}/>
             <div>
                 <p className="text-stone-700 font-[500]">{session?.user?.name}</p>
@@ -83,12 +84,12 @@ const Post = () => {
                 </span>
             </div>
         </header>
-        <section className="w-screen h-max p-3 bg-white shadow-sm">
+        <section className="w-screen h-max p-3 bg-white shadow-sm md:pl-20">
             <input onChange={handleDesc} className="w-screen outline-none p-3 text-sm" type="text" placeholder="What You Want To Tell?"/>
         </section>
         {preview && img &&
         <article className="mt-3 w-screen flex flex-col items-center">
-            <section className="rounded-xl w-[80vw] h-[20rem] bg-white shadow-sm">
+            <section className="rounded-xl w-[80vw] h-[20rem] bg-white shadow-sm md:w-[60vw] lg:w-[40vw] xl:w-[40vw]">
                 <header className="flex items-center gap-2 p-3">
                     <Image className="rounded-full" src={session?.user?.image!} alt="profile" width={40} height={40}/>
                     <p className="text-stone-700 text-sm">{session?.user?.name}</p>
@@ -101,7 +102,7 @@ const Post = () => {
         </article>
         }
         <footer>
-        <footer className='fixed bottom-0 right-0 w-screen h-[11vh] bg-white flex justify-around items-center'>
+        <footer className='fixed bottom-0 right-0 w-screen h-[11vh] bg-white flex justify-around items-center md:h-screen md:w-[4rem] md:flex md:flex-col-reverse md:justify-around md:items-center md:left-0 md:top-0 z-1'>
         <Link href="/">
             <RiHomeSmile2Line size={28} color="rgb(50, 50, 50)"/>
         </Link>
@@ -117,6 +118,7 @@ const Post = () => {
     </footer>
         </footer>
         {success && <p className="bg-stone-800 text-stone-100 w-[80vw] rounded-xl fixed top-[10px] right-[10%] text-center text-sm p-2">{success}</p>}
+        {loading && <p className="bg-stone-800 text-stone-100 w-[80vw] rounded-xl fixed top-[10px] right-[10%] text-center text-sm p-2">Loading..</p>}
     </main>
     </>
   )

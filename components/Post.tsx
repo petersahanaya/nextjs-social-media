@@ -12,13 +12,14 @@ const fetcher: Fetcher<PostType[]> = async (url: string) => {
 
 const Post = () => {
   const { data: posts } = useSWR('/api/post', fetcher)
+
   return (
     <main className='w-screen flex flex-col gap-2 items-center mt-3 '>
-      {posts?.map((post, i) => (
+      {posts?.map((post, i) => 
+        (
         <>
           <Card {...post} key={i} initialData={posts} />
-        </>
-      ))}
+        </>))}
     </main>
   )
 }

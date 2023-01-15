@@ -12,9 +12,9 @@ const Loading = () => {
             </section>
             <div className="w-[8rem] p-5 bg-stone-600 rounded-xl animate-pulse"></div>
         </header>
-        <nav className="w-screen h-screen overflow-scroll flex flex-col items-center mt-3 gap-2">
+        <nav className="w-screen flex flex-col items-center mt-3 gap-2">
         {loadArr.map((_, i) => (
-        <main key={i} className="w-[80vw] rounded-xl h-[24rem] bg-white shadow-sm">
+        <main key={i} className="w-[80vw] md:w-[60vw] lg:w-[40vw] xl:w-[40vw] rounded-xl h-[24rem] bg-white shadow-sm">
         <header className="w-full p-2 gap-2 flex items-center">
             <div className="p-2 w-[3rem] h-[3rem] rounded-full bg-stone-600 animate-pulse"></div>
             <span className="w-[4rem] h-[1rem] rounded-2xl p-1 bg-stone-600 animate-pulse"></span>

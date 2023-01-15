@@ -1,12 +1,38 @@
 import { ObjectId } from "mongodb"
 
+type UserType = {
+    id? : ObjectId,
+    userId : string,
+    username : string,
+    profile : string,
+}
+
+type FollowType = {
+    id? : ObjectId,
+    userId : string,
+    username : string,
+    profile : string,
+    whoFollow : string,
+    whoFollowId : string,
+    whoFollowProfile : string
+}
+
+type LoginType = {
+    id? : ObjectId,
+    userId : string,
+    username : string,
+    profile : string,
+    followed : Array<UserType>
+}
+
 type PostType = {
-    id : ObjectId,
+    id? : ObjectId,
     postId : string
     username : string,
     profile : string,
     image : string,
     desc : string,
+    userId : string,
     likes : Array<LikesType>
 }
 
@@ -23,7 +49,8 @@ type CommentType = {
     username : string,
     profile : string,
     desc : string,
-    date : date
+    date : date,
+    commentId : string
 }
 
 type LikesType = {

@@ -3,7 +3,7 @@ import { signOut } from "next-auth/react"
 
 const Switch = () => {
   return (
-    <article className="pb-[7rem] pl-5 absolute bottom-0 left-0">
+    <article className="pb-[7rem] pl-5 absolute bottom-0 left-0 md:pl-20">
         <section>
           <p className="text-stone-600 text-sm">My Account</p>
           <div className="mt-3">

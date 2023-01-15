@@ -11,7 +11,7 @@ const Postloading = () => {
             </section>
         </header>
         <article className="w-[90vw] m-auto p-6 bg-stone-600 animate-pulse rounded-xl"></article>
-        <footer className="fixed bottom-0 right-0 w-screen h-[11vh] bg-white flex justify-around items-center">
+        <footer className="fixed bottom-0 right-0 w-screen h-[11vh] bg-white flex justify-around items-center md:h-screen md:w-[4rem] md:flex md:flex-col md:justify-around md:items-center md:left-0 md:top-0 z-1">
             <div className="bg-stone-600 animate-pulse w-[3rem] h-[3rem] rounded-full"></div>
             <div className="bg-stone-600 animate-pulse w-[3rem] h-[3rem] rounded-full"></div>
             <div className="bg-stone-600 animate-pulse w-[3rem] h-[3rem] rounded-full"></div>

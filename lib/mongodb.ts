@@ -1,8 +1,9 @@
+
 // mongodb.js
 import { Db, MongoClient } from 'mongodb'
 
-let cachedClient = null;
-let cachedDb = null;
+let cachedClient : MongoClient | null  = null;
+let cachedDb : Db | null = null;
 
 export async function connectToDatabase() : Promise<{client : MongoClient, db : Db}> {
   // check the cached.
@@ -13,24 +14,27 @@ export async function connectToDatabase() : Promise<{client : MongoClient, db : 
           db: cachedDb,
       };
   }
-
-  // set the connection options
   const opts = {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+    useUnifiedTopology: true,
+    useNewUrlParser: true
   };
 
   // Connect to cluster
-  let client = new MongoClient(process.env.MONGODB_URI!, opts);
-  await client.connect();
-  let db = client.db("App");
+  try {
 
-  // set cache
-  cachedClient = client;
-  cachedDb = db;
-
-  return {
+    let client = new MongoClient(process.env.MONGODB_URI!, opts);
+    await client.connect();
+    let db = client.db("App");
+    
+    // set cache
+    cachedClient = client;
+    cachedDb = db;
+    
+    return {
       client: cachedClient,
       db: cachedDb,
-  };
+    };
+  }catch(e) {
+    console.log(e)
+  }
 }
