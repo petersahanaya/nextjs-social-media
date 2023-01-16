@@ -38,6 +38,7 @@ handler.get(async(_, res : NextApiResponse) => {
         const Posts = await Post.find({}, {projection : {_id : 0}}).toArray()   
         res.json({post : Posts})
     }catch(e) {
+        return res.status(400).json({msg : e})
     }
 })
 

@@ -16,9 +16,9 @@ const getFriends: Fetcher<{ followed: FollowType[] }> = async (url: string) => {
 };
 
 const PageFriend = () => {
-  const { data: session } : any = useSession();
+  const { data: session } = useSession();
   const url = `${process.env.PORT}/api/friend?userId=${session?.user?.id}`
-  const { data: friends, isLoading, mutate } : any = useSWR(
+  const { data: friends, isLoading, mutate }  = useSWR(
     url
     ,
     getFriends

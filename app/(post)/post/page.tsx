@@ -8,7 +8,7 @@ import { ChangeEvent, useState } from "react"
 import Link from "next/link"
 import { RiHomeSmile2Line } from "react-icons/ri"
 import Images from "../../../components/Images"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 const Post = () => {
     const { data : session } = useSession()

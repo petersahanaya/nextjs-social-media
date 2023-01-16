@@ -22,6 +22,7 @@ export default async function handler (req : NextApiRequest, res : NextApiRespon
                     return res.json({msg : "follow", data : find})
                 }
             }catch(e) {
+                return res.status(400).json({msg : e})
             }
     }
 }

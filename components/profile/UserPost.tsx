@@ -2,8 +2,7 @@
 
 import useSWR, { Fetcher } from 'swr'
 import Image from "next/image"
-import { PostType } from "../../type"
-import { profileSession } from '../../app/(global)/(profile)/profile/page';
+import { PostType, profileSession } from "../../type"
 
 const fetcher : Fetcher<{ data? : PostType[], msg? : string }> = async (url : string) => {
     const res = await fetch(url)

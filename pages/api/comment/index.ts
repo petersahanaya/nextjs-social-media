@@ -14,6 +14,7 @@ const handler : NextApiHandler = async (req, res) => {
             const comments = await Comment.find({postId : query.postId}, {projection : {_id : 0}}).toArray()
             res.json({comments})
         }catch(e) {
+            return res.status(400).json({msg : e})
         }
     }
 
@@ -27,6 +28,7 @@ const handler : NextApiHandler = async (req, res) => {
 
             res.json({msg : "Comment Added.."})            
         }catch(e) {
+            return res.status(400).json({msg : e})
         }
     }
 
@@ -38,6 +40,7 @@ const handler : NextApiHandler = async (req, res) => {
             const deleteOne = await Comment.deleteOne({commentId})
             res.json({msg : "Comment Deleted.."})
         }catch(e) {
+            return res.status(400).json({msg : e})
         }
     }
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useRouter} from "next/router";
+import { usePathname } from "next/navigation";
 import { RiHomeSmile2Line, RiHomeSmile2Fill } from "react-icons/ri";
 import { MdOutlineAddCircleOutline } from "react-icons/md";
 import { FaUserFriends } from "react-icons/fa";
@@ -9,7 +9,7 @@ import Link from "next/link";
 import Images from "./Images";
 
 const Footer = () => {
-  const { asPath } = useRouter();
+  const asPath = usePathname();
   const { data: session } = useSession();
   return (
     <footer className="fixed bottom-0 right-0 w-screen h-[11vh] bg-white flex justify-around items-center md:h-screen md:w-[4rem] md:flex md:flex-col-reverse md:justify-around md:items-center md:left-0 md:top-0 z-1">

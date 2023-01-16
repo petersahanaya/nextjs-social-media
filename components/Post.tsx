@@ -11,7 +11,7 @@ const fetcher: Fetcher<PostType[]> = async (url: string) => {
 }
 
 const Post = () => {
-  const { data: posts } = useSWR(`${process.env.PORT}/api/post`, fetcher)
+  const { data: posts } = useSWR(`${process.env.PORT! || "http://localhost:3000"}/api/post`, fetcher)
 
   return (
     <main className='w-screen flex flex-col gap-2 items-center mt-3 '>

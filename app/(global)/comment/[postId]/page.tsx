@@ -4,7 +4,15 @@ import { authOption } from "../../../../pages/api/auth/[...nextauth]"
 import { CommentType } from "../../../../type"
 
 const getComments = async (postId : string, url : string) : Promise<{comments : CommentType[]}> => {
-    const res  = await fetch(`${url}?postId=${postId}`)
+    const res  = await fetch(`${url}?postId=${postId}`, {
+      cache : "no-store"
+    })
+
+    if(!res.ok) {
+      const data = await res.json()
+      throw new Error(data?.msg || "Something is Wrong in comment")
+    }
+
     return res.json()
 }
 

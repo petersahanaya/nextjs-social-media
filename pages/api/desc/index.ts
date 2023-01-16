@@ -22,6 +22,7 @@ const handler : NextApiHandler = async (req, res) => {
             
             return res.json({msg : "Post Uploaded.."})
         }catch(e) {
+            return res.status(400).json({msg : e})
         }
     }
     
@@ -30,24 +31,33 @@ const handler : NextApiHandler = async (req, res) => {
         const Query = req.query
 
         if(likes.__type === "like") {
-        const Post = db.collection<PostType>('Post')
+            try {
 
-            const allLike = await Post.findOne({postId : Query.postId})
-            
-            const LikePost = await Post.updateOne({postId : Query.postId}, {$set : {likes : [...allLike!.likes, { postId : likes.postId, username : likes.username }]}}) 
-
-            res.json({msg : "Liked.."})
+                const Post = db.collection<PostType>('Post')
+                
+                const allLike = await Post.findOne({postId : Query.postId})
+                
+                const LikePost = await Post.updateOne({postId : Query.postId}, {$set : {likes : [...allLike!.likes, { postId : likes.postId, username : likes.username }]}}) 
+                
+                res.status(400).json({msg : "Liked.."})
+            }catch(e) {
+                return res.json({msg : e})
+            }
         }
 
         if(likes.__type === "unlike") {
-            const Post = db.collection<PostType>('Post')
-            const allLike : Awaited<PostType | null> = await Post.findOne({postId : Query.postId})
-
-            const unlike = allLike?.likes.filter((like) => like.username !== likes.username)
-            
-            const LikePost = await Post.updateOne({postId : Query.postId}, {$set : {likes : unlike}}) 
-
-            res.json({msg : "UnLiked.."})
+            try {
+                const Post = db.collection<PostType>('Post')
+                const allLike : Awaited<PostType | null> = await Post.findOne({postId : Query.postId})
+                
+                const unlike = allLike?.likes.filter((like) => like.username !== likes.username)
+                
+                const LikePost = await Post.updateOne({postId : Query.postId}, {$set : {likes : unlike}}) 
+                
+                res.json({msg : "UnLiked.."})
+            }catch(e) {
+                return res.status(400).json({msg : e})
+            }
         }   
     }
 }

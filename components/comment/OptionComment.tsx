@@ -9,6 +9,7 @@ const OptionComment = ({commentId} : {commentId : string}) => {
     const [isDeleted, setIsDeleted] = useState("")
     const router = useRouter()
     
+    
     const handleDelete = async (id : string) => {
         setIsLoading(true)
         const res = await fetch(`${process.env.PORT}api/comment?commentId=${id}`, {

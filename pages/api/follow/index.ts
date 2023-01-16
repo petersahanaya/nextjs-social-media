@@ -13,7 +13,6 @@ const handler : NextApiHandler = async (req, res) => {
             const find : Awaited<FollowType | null> = await Follow.findOne({userId, whoFollowId})
             
             const isExist : Awaited<LoginType | null> = await Login.findOne({ userId : whoFollowId })
-            console.log(isExist)
             if(!isExist) return res.json({msg : "Cannot find the user you're try to follow.."})
             
             if(!find) {
@@ -27,6 +26,7 @@ const handler : NextApiHandler = async (req, res) => {
             return res.json({msg : "unfollow"})
             
         }catch(e) {
+            return res.status(400).json({msg : e})
         }
     }
 }

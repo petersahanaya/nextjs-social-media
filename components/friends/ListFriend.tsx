@@ -20,7 +20,7 @@ const ListFriend = ({session, params} : {session? : Session, params? : {id : str
 
         mutate({followed : filtering!}, {revalidate : false})
 
-        const res = await fetch(`${process.env.PORT}api/follow`, {
+        const res = await fetch(`${process.env.PORT}/api/follow`, {
           method : "POST",
           headers : {
             "Content-Type" : "application/json"

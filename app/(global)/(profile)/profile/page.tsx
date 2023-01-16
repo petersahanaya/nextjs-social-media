@@ -1,6 +1,5 @@
 'use client'
 
-import { Session } from "next-auth"
 import Images from "../../../../components/Images"
 import UserPost from "../../../../components/profile/UserPost"
 import Switch from "../../../../components/Switch"
@@ -12,14 +11,6 @@ import ProfileLoading from "./loading"
 import { useState } from "react"
 import ListFriend from "../../../../components/friends/ListFriend"
 
-export interface profileSession extends Session {
-  user : {
-    name : string,
-    image : string,
-    email : string,
-    id : string
-  }
-}
 
 const getFriends : Fetcher<{followed : FollowType[]}> = async (url : string) => {
   const res = await fetch(url);
@@ -27,8 +18,8 @@ const getFriends : Fetcher<{followed : FollowType[]}> = async (url : string) => 
 }
 
 const Profile = () => {
-  const { data : session } : any = useSession();
-  const { data, isLoading } = useSWR(`${process.env.PORT}api/friend?userId=${session?.user?.id}`, getFriends)
+  const { data : session }  = useSession();
+  const { data, isLoading } = useSWR(`${process.env.PORT}/api/friend?userId=${session?.user?.id}`, getFriends)
   const [isFriend, setIsFriend] = useState(false);
 
   if(isLoading) {

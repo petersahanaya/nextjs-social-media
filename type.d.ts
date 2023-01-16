@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb"
+import { Session } from "next-auth"
 
 type UserType = {
     id? : ObjectId,
@@ -52,6 +53,16 @@ type CommentType = {
     date : date,
     commentId : string
 }
+
+interface profileSession extends Session {
+    user : {
+      name : string,
+      image : string,
+      email : string,
+      id : string
+    }
+  }
+  
 
 type LikesType = {
     id : ObjectId,
