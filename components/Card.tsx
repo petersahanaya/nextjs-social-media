@@ -120,9 +120,7 @@ const Card: React.FC<CardProps> = ({
   return (
     <nav className="bg-white w-[80vw] md:w-[60vw] h-[24.5rem] lg:w-[40vw] xl:w-[40vw] rounded-xl shadow-sm">
       <header
-        className={`w-full flex items-center gap-2 p-3 ${
-          session?.user?.name === username ? "justify-around" : ""
-        }`}
+        className={`w-full flex items-center gap-2 p-3`}
       >
         <div className="flex justify-around items-center gap-2">
           <Link
