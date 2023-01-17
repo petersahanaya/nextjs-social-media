@@ -51,7 +51,7 @@ const Card: React.FC<CardProps> = ({
         return data;
       }
     });
-    mutate("/api/post", mappedData, { revalidate: false });
+    mutate("https://p3social.vercel.app/api/post", mappedData, { revalidate: false });
 
     const res = await fetch(`https://p3social.vercel.app/api/desc?postId=${postId}`, {
       method: "PATCH",
@@ -87,7 +87,7 @@ const Card: React.FC<CardProps> = ({
       }
     });
 
-    mutate("/api/post", mappedData, { revalidate: false });
+    mutate("https://p3social.vercel.app/api/post", mappedData, { revalidate: false });
 
     const res = await fetch(`https://p3social.vercel.app/api/desc?postId=${postId}`, {
       method: "PATCH",
@@ -143,11 +143,7 @@ const Card: React.FC<CardProps> = ({
             <p className="text-stone-700 text-sm">{username}</p>
           </Link>
         </div>
-        {session?.user?.name === username && (
-          <span className="cursor-pointer">
-            <p className="font-bold">. . .</p>
-          </span>
-        )}
+       
       </header>
       <article className="w-full">
         <section className="relative w-full h-[13rem]">
