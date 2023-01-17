@@ -1,12 +1,10 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
-
-export default async function middleware (request : NextRequest) {
-    const session = request.cookies.get("next-auth.session-token")
-
-    if(!session?.value) return NextResponse.redirect(`${process.env.PORT}`)
-}
-
+export { default } from "next-auth/middleware";
 export const config = {
-    matcher : ["/profile/:path*", "/user/:path*", "/comment/:path*", "/friends/:path*", "/post/:path*"]
-}
+  matcher: [
+    "/profile/:path*",
+    "/user/:path*",
+    "/comment/:path*",
+    "/friends/:path*",
+    "/post/:path*",
+  ],
+};

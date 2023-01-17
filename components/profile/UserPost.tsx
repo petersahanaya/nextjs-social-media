@@ -33,7 +33,7 @@ const UserPost = ({session, userId} : { session? : profileSession, userId? : str
     <nav className="flex items-center justify-around flex-wrap mt-2 p-2">
      {posts?.data?.map((post, i) => (
         <section key={i} className="w-[200px] h-[13rem] shadow-sm transition-[200ms] cursor-pointer hover:scale-105">
-            <Image src={`/${post.image}`} width={200} height={140} alt="post" className="w-full h-full object-cover rounded-xl"/>
+            <Image src={`${post.image}`} width={200} height={140} alt="post" className="w-full h-full object-cover rounded-xl"/>
         </section>
      ))}   
      

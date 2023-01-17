@@ -53,7 +53,7 @@ const Card: React.FC<CardProps> = ({
     });
     mutate("/api/post", mappedData, { revalidate: false });
 
-    const res = await fetch(`${process.env.PORT}/api/desc?postId=${postId}`, {
+    const res = await fetch(`/api/desc?postId=${postId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const Card: React.FC<CardProps> = ({
 
     mutate("/api/post", mappedData, { revalidate: false });
 
-    const res = await fetch(`${process.env.PORT}/api/desc?postId=${postId}`, {
+    const res = await fetch(`/api/desc?postId=${postId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -154,7 +154,7 @@ const Card: React.FC<CardProps> = ({
           <Image
             className="w-auto object-cover"
             onDoubleClick={() => handleDblClick(postId)}
-            src={`/${image}`}
+            src={`${image}`}
             alt="Post"
             fill={true}
           />
