@@ -1,6 +1,11 @@
 ## Social Media Website
 Welcome to our social media website, where you can connect with friends and share your thoughts and experiences.
 
+## Technology 
+- NextJs 
+- SWR
+- MongoDB
+
 ## Features
 Create a profile and connect with friends
 Share posts and photos
