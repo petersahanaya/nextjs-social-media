@@ -18,7 +18,7 @@ const isLike = (likes: Array<LikesType>, username: string): boolean => {
 };
 
 const fetcher = (url: string) => {
-  return fetch(`${process.env.PORT}/api/post`).then((res) => res.json());
+  return fetch(`https://p3social.vercel.app/api/post`).then((res) => res.json());
 };
 
 interface CardProps extends PostType {
@@ -38,7 +38,7 @@ const Card: React.FC<CardProps> = ({
   const { data: session } = useSession();
   const router = useRouter();
   const { mutate } = useSWRConfig();
-  const { trigger } = useMutation("/api/post", fetcher);
+  const { trigger } = useMutation("https://p3social.vercel.app/api/post", fetcher);
 
   const handleLike = async (postId: string) => {
     const mappedData = initialData.map((data) => {
@@ -53,7 +53,7 @@ const Card: React.FC<CardProps> = ({
     });
     mutate("/api/post", mappedData, { revalidate: false });
 
-    const res = await fetch(`/api/desc?postId=${postId}`, {
+    const res = await fetch(`https://p3social.vercel.app/api/desc?postId=${postId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -89,7 +89,7 @@ const Card: React.FC<CardProps> = ({
 
     mutate("/api/post", mappedData, { revalidate: false });
 
-    const res = await fetch(`/api/desc?postId=${postId}`, {
+    const res = await fetch(`https://p3social.vercel.app/api/desc?postId=${postId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -11,7 +11,7 @@ const getFriends : Fetcher<{followed : FollowType[]}> = async (url : string) => 
   }
 
 const ListFriend = ({session, params} : {session? : Session, params? : {id : string}}) => {
-    const url = `${process.env.PORT}/api/friend?userId=${session?.user?.id ? session?.user?.id : params?.id}`
+    const url = `https://p3social.vercel.app/api/friend?userId=${session?.user?.id ? session?.user?.id : params?.id}`
     const { data : follows, isLoading, mutate } = useSWR(url, getFriends)
     const { trigger } = useSWRMutation(url, getFriends)
 
@@ -20,7 +20,7 @@ const ListFriend = ({session, params} : {session? : Session, params? : {id : str
 
         mutate({followed : filtering!}, {revalidate : false})
 
-        const res = await fetch(`${process.env.PORT}/api/follow`, {
+        const res = await fetch(`https://p3social.vercel.app/api/follow`, {
           method : "POST",
           headers : {
             "Content-Type" : "application/json"

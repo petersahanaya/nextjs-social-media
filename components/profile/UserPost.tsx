@@ -10,7 +10,7 @@ const fetcher : Fetcher<{ data? : PostType[], msg? : string }> = async (url : st
 }
 
 const UserPost = ({session, userId} : { session? : profileSession, userId? : string }) => {
-    const {data : posts, isLoading} = useSWR(`${process.env.PORT}/api/posts?userId=${session?.user?.id! ? session?.user?.id :  userId}`, fetcher)
+    const {data : posts, isLoading} = useSWR(`https://p3social.vercel.app/api/posts?userId=${session?.user?.id! ? session?.user?.id :  userId}`, fetcher)
     const LoadArr = [1, 2, 3, 4]
 
   if(isLoading) return (

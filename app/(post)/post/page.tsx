@@ -48,7 +48,7 @@ const Post = () => {
                 const data: Awaited<{ secure_url: string }> = await res.json()
                 if (res.ok) {
                     try {
-                        const result = await fetch("/api/desc", {
+                        const result = await fetch("https://p3social.vercel.app/api/desc", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"

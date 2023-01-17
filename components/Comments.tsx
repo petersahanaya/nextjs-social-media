@@ -22,7 +22,7 @@ const Comments: React.FC<{ comments: CommentType[], session: Session | null, pos
     if (!desc) return alert("Cannot Send Comment without Description..")
 
     setIsAdding(true)
-    const res = await fetch(`${process.env.PORT}/api/comment`, {
+    const res = await fetch(`https://p3social.vercel.app/api/comment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

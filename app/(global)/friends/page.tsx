@@ -17,7 +17,7 @@ const getFriends: Fetcher<{ followed: FollowType[] }> = async (url: string) => {
 
 const PageFriend = () => {
   const { data: session } = useSession();
-  const url = `${process.env.PORT}/api/friend?userId=${session?.user?.id}`
+  const url = `https://p3social.vercel.app/api/friend?userId=${session?.user?.id}`
   const { data: friends, isLoading, mutate }  = useSWR(
     url
     ,

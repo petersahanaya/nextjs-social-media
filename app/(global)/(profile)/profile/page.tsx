@@ -19,7 +19,7 @@ const getFriends : Fetcher<{followed : FollowType[]}> = async (url : string) => 
 
 const Profile = () => {
   const { data : session }  = useSession();
-  const { data, isLoading } = useSWR(`${process.env.PORT}/api/friend?userId=${session?.user?.id}`, getFriends)
+  const { data, isLoading } = useSWR(`https://p3social.vercel.app/api/friend?userId=${session?.user?.id}`, getFriends)
   const [isFriend, setIsFriend] = useState(false);
 
   if(isLoading) {
