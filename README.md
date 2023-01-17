@@ -1,36 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Social Media Website
+Welcome to our social media website, where you can connect with friends and share your thoughts and experiences.
 
-## Getting Started
+## Features
+Create a profile and connect with friends
+Share posts and photos
+Comment and like posts
+Search for users and groups
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Getting started
+Sign up for an account by providing a valid email and password.
+Verify your email address to activate your account.
+Log in to your account.
+Complete your profile by adding a profile picture and bio.
+Connect with friends by searching for their username and sending a friend request.
+Share your thoughts and experiences by creating posts and uploading photos.
+Comment and like on your friends' posts.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technical Requirements
+Latest version of Chrome, Firefox, Safari or Edge
+A reliable internet connection
+JavaScript and Cookies enabled
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Support
+If you have any questions or issues, please contact us at petersahanaya09@gmail.com.com. We'll be happy to help you.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## Contribution
+If you want to contribute to the development of the website, please reach out to us at petersahanaya09@gmail.com.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## License
+This project is licensed under the MIT License
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Conclusion
+Thank you for using our social media website. We hope you enjoy using it and connecting with friends.
