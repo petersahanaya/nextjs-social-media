@@ -115,7 +115,7 @@ const Post = () => {
                             </label>
                             <input name="file" onChange={handleFile} id="galery" type="file" className="hidden" accept="image/*" />
                         </div>
-                        <div onClick={handlePost}>
+                        <div disabled={loading} onClick={handlePost}>
                             <FaTelegramPlane size={47} className="bg-blue-500 text-white p-3 rounded-full cursor-pointer transition-[200ms] shadow-md hover:bg-blue-600" />
                         </div>
                     </footer>
