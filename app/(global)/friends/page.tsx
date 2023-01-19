@@ -9,6 +9,7 @@ import useSWRMutation from 'swr/mutation'
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import FriendLoading from "./loading";
+import { redirect } from "next/navigation";
 
 const getFriends: Fetcher<{ followed: FollowType[] }> = async (url: string) => {
   const res = await fetch(url);
@@ -17,6 +18,9 @@ const getFriends: Fetcher<{ followed: FollowType[] }> = async (url: string) => {
 
 const PageFriend = () => {
   const { data: session } = useSession();
+  if(!session?.user) {
+    return redirect("/")
+  }
   const url = `https://p3social.vercel.app/api/friend?userId=${session?.user?.id}`
   const { data: friends, isLoading, mutate }  = useSWR(
     url

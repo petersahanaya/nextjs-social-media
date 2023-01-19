@@ -9,6 +9,7 @@ import { GiThreeFriends } from "react-icons/gi"
 import UserPost from "../../../../../components/profile/UserPost"
 import { useState } from "react"
 import ListFriend from "../../../../../components/friends/ListFriend"
+import { redirect } from "next/navigation"
 
 const fetcher: Fetcher<{ msg: "cannot found" | "follow" | "unfollow", data: LoginType} > = async (url: string) => {
   const res = await fetch(url)
@@ -17,6 +18,10 @@ const fetcher: Fetcher<{ msg: "cannot found" | "follow" | "unfollow", data: Logi
 
 const User = ({ params }: { params: { id: string } }) => {
   const { data: session }  = useSession()
+
+  if(!session?.user) {
+    return redirect("/")
+  }
   const { data : follows, isLoading, mutate } = useSWR(`https://p3social.vercel.app/api/user?whoFollowId=${params.id}&&userId=${session?.user?.id}`, fetcher)
   const { trigger } = useMutation(`https://p3social.vercel.app/api/user?whoFollowId=${params.id}&&userId=${session?.user?.id}`, fetcher)
   const [isFriend, setIsFriend] = useState(false)

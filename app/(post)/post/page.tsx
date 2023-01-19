@@ -8,10 +8,13 @@ import { ChangeEvent, useState } from "react"
 import Link from "next/link"
 import { RiHomeSmile2Line } from "react-icons/ri"
 import Images from "../../../components/Images"
-import { useRouter } from "next/navigation"
+import { redirect, useRouter } from "next/navigation"
 
 const Post = () => {
     const { data: session } = useSession()
+    if(!session?.user) {
+        return redirect("/")
+      }
     const [img, setImg] = useState<FileList | null>(null)
     const [preview, setPreview] = useState("")
     const [desc, setDesc] = useState("")

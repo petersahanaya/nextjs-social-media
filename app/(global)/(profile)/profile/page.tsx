@@ -10,6 +10,7 @@ import { FollowType } from "../../../../type"
 import ProfileLoading from "./loading"
 import { useState } from "react"
 import ListFriend from "../../../../components/friends/ListFriend"
+import { redirect } from "next/navigation"
 
 
 const getFriends : Fetcher<{followed : FollowType[]}> = async (url : string) => {
@@ -19,6 +20,9 @@ const getFriends : Fetcher<{followed : FollowType[]}> = async (url : string) => 
 
 const Profile = () => {
   const { data : session }  = useSession();
+  if(!session?.user) {
+    return redirect("/")
+  }
   const { data, isLoading } = useSWR(`https://p3social.vercel.app/api/friend?userId=${session?.user?.id}`, getFriends)
   const [isFriend, setIsFriend] = useState(false);
 

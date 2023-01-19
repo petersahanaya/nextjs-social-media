@@ -1,4 +1,5 @@
 import { unstable_getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 import Comments from "../../../../components/Comments"
 import { authOption } from "../../../../pages/api/auth/[...nextauth]"
 import { CommentType } from "../../../../type"
@@ -18,6 +19,9 @@ const getComments = async (postId : string, url : string) : Promise<{comments : 
 
 const Comment = async ({params} : {params : { postId : string }}) => {   
     const session = await unstable_getServerSession(authOption)
+    if(!session?.user) {
+      return redirect("/")
+    }
     const data = await getComments(params.postId, `https://p3social.vercel.app/api/comment`)
   return (
     <main className="bg-slate-100 w-screen h-screen">
