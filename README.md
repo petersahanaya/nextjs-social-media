@@ -1,40 +1,17 @@
-## Social Media Website
-Welcome to our social media website, where you can connect with friends and share your thoughts and experiences.
+![Cover Image](https://github.com/petersahanaya/nextjs-social-media/assets/114085979/666305cf-c04c-47fe-af3e-2bd7399b9022)
 
-## Technology 
-- NextJs 
-- SWR
-- MongoDB
+### 💁🏼‍♂️ Social Media App - P3Social
+P3Social is a social media app built using Next Js, MongoDB and other technology. I got an inspiration from instagram app. 
 
-## Features
-Create a profile and connect with friends
-Share posts and photos
-Comment and like posts
-Search for users and groups
+### 💡 Features
+* Authentication with Oauth
+* Profile management
+* Post, like and comment
+
+### 🎥 Video Preview 
+[![Video Preview](https://github.com/petersahanaya/nextjs-social-media/assets/114085979/666305cf-c04c-47fe-af3e-2bd7399b9022)](https://github.com/petersahanaya/nextjs-social-media/assets/114085979/340cb820-d6a5-4ae1-b886-5e6d4d07fee7)
+
+### 🕹️ Technology 
+Next Js · React Js · Node Js · Tailwind Css · SWR · MongoDB
 
 
-## Getting started
-Sign up for an account by providing a valid email and password.
-Verify your email address to activate your account.
-Log in to your account.
-Complete your profile by adding a profile picture and bio.
-Connect with friends by searching for their username and sending a friend request.
-Share your thoughts and experiences by creating posts and uploading photos.
-Comment and like on your friends' posts.
-
-## Technical Requirements
-Latest version of Chrome, Firefox, Safari or Edge
-A reliable internet connection
-JavaScript and Cookies enabled
-
-## Support
-If you have any questions or issues, please contact us at petersahanaya09@gmail.com.com. We'll be happy to help you.
-
-## Contribution
-If you want to contribute to the development of the website, please reach out to us at petersahanaya09@gmail.com.
-
-## License
-This project is licensed under the MIT License
-
-## Conclusion
-Thank you for using our social media website. We hope you enjoy using it and connecting with friends.
